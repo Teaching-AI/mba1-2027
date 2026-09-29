@@ -1,0 +1,24 @@
+name: "Synchro quotidienne des annonces"
+
+# Remplace le planificateur interne : un hebergement gratuit s'endort sans trafic.
+# Secrets a creer dans le repo (Settings > Secrets and variables > Actions) :
+#   API_URL      URL de l'API deployee (sans / final)
+#   ADMIN_TOKEN  meme valeur que la variable ADMIN_TOKEN de l'API
+on:
+  schedule:
+    - cron: "0 5 * * *"   # 5h UTC = 7h a Paris en ete, 6h en hiver
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Reveiller l'API (demarrage a froid)
+        run: curl -s --max-time 120 "${{ secrets.API_URL }}/health" || true
+      - name: Lancer la synchro
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 -X POST \
+            -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" "${{ secrets.API_URL }}/admin/sync")
+          echo "HTTP $code"
+          test "$code" = "200"

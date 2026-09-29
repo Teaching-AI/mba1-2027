@@ -1,0 +1,80 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Fichiers volumineux
+*.pdf
+*.xlsx
+
+# Node modules (si utilisé)
+node_modules/
+
+# Données sensibles
+**/secrets/
+**/private/
+credentials.json
+*.key
+
+# OS generated files
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Données étudiantes : jamais dans git (notes, identifiants, grilles remplies)
+projets/**/*.csv
+projets/**/jury/
+projets/**/notes*
+.~lock*
+
+# Clés GCP
+*-sa-key.json
+service-account*.json
+hidden_*.csv
+contributions_*.csv
+scores_*.csv
+
+# Supports de cours PDF : versionnés (exception à la règle *.pdf)
+!modules/**/*.pdf
